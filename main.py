@@ -10,6 +10,7 @@ from pathlib import Path
 import time
 from typing import List, Dict, Any
 import argparse
+import io
 
 class ColumbusDrawingAnalyzer:
     def __init__(self, model_name="llava-hf/llava-v1.6-mistral-7b-hf"):
