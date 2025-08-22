@@ -35,18 +35,19 @@ def analyze_drawing(image_path):
     else:
         image = Image.open(image_path)
     
-    # Simple prompt that works
-    prompt = "What dimensions and tolerances can you see in this mechanical drawing? List them all."
+    # Simple prompt '[INST] <image>\n' tokens are necessary for this model. IDK why. 
+    prompt = "[INST] <image>\nWhat dimensions and tolerances can you see in this mechanical drawing? List them all. [/INST]"
     
     # Process
-    inputs = processor(prompt, image, return_tensors="pt").to(model.device)
+    inputs = processor(text=prompt, images=image, return_tensors="pt").to(model.device)
     
     print(f"🔍 Running analysis...")
     with torch.no_grad():
         output = model.generate(**inputs, max_new_tokens=512, do_sample=False)
     
     # Get result
-    response = processor.decode(output[0], skip_special_tokens=True)
+    input_token_len = inputs['input_ids'].shape[1]
+    response = processor.tokenizer.decode(output[0][input_token_len:], skip_special_tokens=True)
     
     # Clean up response
     if prompt in response:
@@ -67,3 +68,6 @@ if __name__ == "__main__":
     print("="*60)
     print(result)
     print("="*60)
+
+    # call as such: python simple_script.py [img path]
+    # ex: python simple_script.py images/PIS2.375-0001REV0.pdf
