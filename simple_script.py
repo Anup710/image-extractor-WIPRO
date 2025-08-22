@@ -37,6 +37,17 @@ def analyze_drawing(image_path):
     
     # Simple prompt '[INST] <image>\n' tokens are necessary for this model. IDK why. 
     prompt = "[INST] <image>\nWhat dimensions and tolerances can you see in this mechanical drawing? List them all. [/INST]"
+
+    prompt_detailed = """You are analyzing a mechanical engineering drawing. Focus on:
+                        1. Identifying the component type (piston, gear, shaft, etc.)
+                        2. Extract ALL numerical dimensions visible, including their tolerances (±)
+                        3. Note the geometric feature each dimension refers to (diameter, length, groove width, etc.)
+                        4. List thread specifications (UNF, UNC, etc.) if present
+                        5. Identify any special callouts or manufacturing notes
+
+                        Format your response as:
+                        - Component: [type]
+                        - Dimensions found: [number] ± [tolerance] - [geometric feature]"""
     
     # Process
     inputs = processor(text=prompt, images=image, return_tensors="pt").to(model.device)
