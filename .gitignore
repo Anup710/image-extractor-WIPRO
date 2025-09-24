@@ -1,1 +1,5 @@
 venv/
+Openai/frontend/node_modules/
+Openai/backend/.env
+Openai/.claude
+Openai/images
