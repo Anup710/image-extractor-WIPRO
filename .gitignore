@@ -1,5 +1,51 @@
+# Virtual environments
 venv/
+env/
+.venv/
+
+# Node modules
 Openai/frontend/node_modules/
+Columbus_CV_vibecoded/frontend/node_modules/
+**/node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
 Openai/backend/.env
+Columbus_CV_vibecoded/backend/.env
+
+# Claude settings
+.claude/
 Openai/.claude
+Columbus_CV_vibecoded/.claude/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Images and test files
 Openai/images
+Columbus_CV_vibecoded/images/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Columbus_CV_vibecoded directory
+Columbus_CV_vibecoded/
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
